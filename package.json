@@ -1,0 +1,20 @@
+{
+  "name": "node2react",
+  "version": "1.0.0",
+  "description": "Learning MERN stact",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "dev": "nodemon src/app.js",
+     "start": "node src/app.js"
+  },
+  "keywords": [
+    "React",
+    "Node.js"
+  ],
+  "author": "Ayush Verma",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
