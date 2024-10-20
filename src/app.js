@@ -1,17 +1,29 @@
 const express = require('express')
 
 const app=express();
+app.use(express.json());
 
 
-app.use('/',(req,res)=>{
-    res.send("HomePage!")
-})
-app.use('/test',(req,res)=>{
+app.use('/abc',(req,res)=>{
     res.send("Test server is running!")    
 })
 
-app.use('/testPage',(req,res)=>{
-     res.send("TestPages server is running now!")
+// app.get('/user',(req,res)=>{
+//     res.send({"name":"Ayush", "email":"vnishu0@gmail.com", "location":"noida"})
+// })
+
+// For making Dynamic Routes
+app.get('/user/:Id/:name',(req,res)=>{
+    const userDetails=req.params;
+    console.log(userDetails);
+    res.send(userDetails)
+})
+
+//For query
+app.get('/user',(req,res)=>{
+    const userDetails=req.query;
+    console.log(userDetails);
+    res.send(JSON.stringify(userDetails))
 })
 
 app.listen(4000,()=>{
