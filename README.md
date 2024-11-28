@@ -1,4 +1,5 @@
 Tinder Backend Clone
+
 This project is a scalable and feature-rich backend for a Tinder-like application, built using Node.js and MongoDB. It provides robust user authentication, secure communication features, and a modular architecture for high performance and reliability.
 
 Features
@@ -39,12 +40,12 @@ npm install
 Create a .env file in the root directory and add the following environment variables:
 
 env
-PORT=5000  
+PORT=4000  
 MONGO_URI=your_mongodb_connection_string  
 JWT_SECRET=your_secret_key  
 Start the server:
 npm start  
-The server will run on http://localhost:5000.
+The server will run on http://localhost:4000.
 
 API Endpoints
 Authentication
