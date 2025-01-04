@@ -1,31 +1,30 @@
-const express = require('express')
+const express = require("express");
+const connectDB = require("./config/database");
+const cookieParser = require("cookie-parser");
+var jwt = require("jsonwebtoken");
+const authRouter = require("./routes/auth");
+const profileRouter = require("./routes/profile");
+const requestRouter = require("./routes/request");
+const userRouter=require("./routes/user");
+const app = express();
+require("dotenv").config();
+// Middleware
+app.use(express.json()); // Parse JSON body
+app.use(cookieParser()); // Parse cookies
 
-const app=express();
-app.use(express.json());
+app.use("/",authRouter);
+app.use("/", profileRouter);
+app.use('/',requestRouter);
+app.use('/',userRouter);
 
-
-app.use('/abc',(req,res)=>{
-    res.send("Test server is running!")    
-})
-
-// app.get('/user',(req,res)=>{
-//     res.send({"name":"Ayush", "email":"vnishu0@gmail.com", "location":"noida"})
-// })
-
-// For making Dynamic Routes
-app.get('/user/:Id/:name',(req,res)=>{
-    const userDetails=req.params;
-    console.log(userDetails);
-    res.send(userDetails)
-})
-
-//For query
-app.get('/user',(req,res)=>{
-    const userDetails=req.query;
-    console.log(userDetails);
-    res.send(JSON.stringify(userDetails))
-})
-
-app.listen(4000,()=>{
-    console.log("Your server is running on port 4000");
-})
+//DB Connection code
+connectDB()
+  .then(() => {
+    console.log("DB connected");
+    app.listen(4000, () => {
+      console.log("Your server is running on port 4000");
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
