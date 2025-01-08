@@ -1,4 +1,5 @@
 const express = require("express");
+const cors=require("cors")
 const connectDB = require("./config/database");
 const cookieParser = require("cookie-parser");
 var jwt = require("jsonwebtoken");
@@ -11,6 +12,12 @@ require("dotenv").config();
 // Middleware
 app.use(express.json()); // Parse JSON body
 app.use(cookieParser()); // Parse cookies
+app.use(cors(
+  {
+    origin:"http://localhost:5173",
+    credentials:true
+  }
+));
 
 app.use("/",authRouter);
 app.use("/", profileRouter);

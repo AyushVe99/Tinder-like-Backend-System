@@ -51,7 +51,9 @@ authRouter.post("/login", async (req, res) => {
       if (comparedPassword) {
         const token = await foundUser[0].getJWT();
         res.cookie("Token", token);
-        res.send("User Login Successfull");
+        res.json({message:"User Login Successfull",
+          data:foundUser[0]
+        });
       } else {
         res.status(401).send("Wrong Password!!");
       }
