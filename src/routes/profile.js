@@ -14,7 +14,7 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    res.json({ user: userData });
+    res.json({ data: userData });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });

@@ -69,7 +69,7 @@ userRouter.get("/user/feed",userAuth, async(req,res)=>{
         res.send({ data:allUsers})
         
     } catch (error) {
-        res.status(400).send("Error", err.message)
+        res.status(400).send("Error", error?.message)
     }
 })
 
