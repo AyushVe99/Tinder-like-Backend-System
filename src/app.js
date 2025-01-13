@@ -12,12 +12,28 @@ require("dotenv").config();
 // Middleware
 app.use(express.json()); // Parse JSON body
 app.use(cookieParser()); // Parse cookies
-app.use(cors(
-  {
-    origin:"http://localhost:5173",
-    credentials:true
-  }
-));
+// app.use(cors(
+//   {
+//     origin:"http://localhost:5173",
+//     credentials:true
+//   }
+// ));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://192.168.1.25:5173"
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 
 app.use("/",authRouter);
 app.use("/", profileRouter);
@@ -28,7 +44,7 @@ app.use('/',userRouter);
 connectDB()
   .then(() => {
     console.log("DB connected");
-    app.listen(4000, () => {
+    app.listen(4000,'0.0.0.0', () => {
       console.log("Your server is running on port 4000");
     });
   })
