@@ -7,7 +7,7 @@ const userAuth = async (req, res, next) => {
     const {Token} = cookies;
     
     if (!Token) {
-      throw new Error("Token Not Found!");
+      return res.status(401).send("Token Not Found!")
     }
     console.log("JWT_SECRET:", process.env.JWT_SECRET)
     const decodedMessage = await jwt.verify(Token, process.env.JWT_SECRET);
