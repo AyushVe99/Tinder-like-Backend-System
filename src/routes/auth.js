@@ -27,9 +27,9 @@ authRouter.post("/signup", async (req, res) => {
       password: hashPassword,
       skills,
     });
-
+    // console.log("User->",user)
     const newUser = await user.save();
-    console.log(newUser);
+    // console.log(newUser);
     res.send("User Added Successfully");
   } catch (err) {
     res.status(400).send("Something Went Wrong!");
@@ -70,7 +70,7 @@ authRouter.post("/logout", userAuth, async (req, res) => {
   await res.cookie("Token", null, {
     expires: new Date(Date.now()),
   });
-  res.send("User LoggedOut Successfully!");
+  res.json({message:"User LoggedOut Successfully!"});
 });
 
 module.exports = authRouter;
