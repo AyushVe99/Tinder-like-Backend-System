@@ -9,15 +9,18 @@ const requestRouter = require("./routes/request");
 const userRouter=require("./routes/user");
 const app = express();
 require("dotenv").config();
+const PORT = process.env.PORT || 4000;
 // Middleware
 app.use(express.json()); // Parse JSON body
 app.use(cookieParser()); // Parse cookies
+
 // app.use(cors(
 //   {
 //     origin:"http://localhost:5173",
 //     credentials:true
 //   }
 // ));
+
 const allowedOrigins = [
   "http://localhost:5173",
   "http://192.168.1.25:5173"
@@ -44,7 +47,7 @@ app.use('/',userRouter);
 connectDB()
   .then(() => {
     console.log("DB connected");
-    app.listen(4000,'0.0.0.0', () => {
+    app.listen(PORT,'0.0.0.0', () => {
       console.log("Your server is running on port 4000");
     });
   })
